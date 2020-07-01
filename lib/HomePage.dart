@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/totalCases.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,8 +19,32 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  @override //this loads data when app opens
+  void initState() {
+    super.initState();
+    this.getJsonData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Covid Tracker"),
+      ),
+      body: FutureBuilder<TotalCases>(
+        future: getJsonData(),
+        builder: (BuildContext context, Snapshot) {
+          if (Snapshot.hasData) {
+            final covid = Snapshot.data;
+            return Column(
+              children: <Widget>[], //access data with "${covid.cases}"
+            );
+          } else if (Snapshot.hasError) {
+            return Text(Snapshot.error.toString());
+          } else
+            return CircularProgressIndicator();
+        },
+      ),
+    );
   }
 }
