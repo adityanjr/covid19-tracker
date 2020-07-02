@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = "https://corona.lmao.ninja/v2/all";
+  final String url = "https://api.rootnet.in/covid19-in/stats/latest";
   Future<TotalCases> getJsonData() async {
     var response = http.get(Uri.encodeFull(url));
     if (response.statusCode == 200) {
