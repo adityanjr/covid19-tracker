@@ -31,11 +31,45 @@ class _WorldClassState extends State<WorldClass> {
         child: FutureBuilder(
           future: datas,
           builder: (BuildContext context, SnapShot) {
-            if(SnapShot.hasData){
-              return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10,childAspectRatio: 1.0), itemBuilder: (BuildContext context,index)=>SizedBox(
-                height: 50,width: 50,child: GestureDetector(onTap: (){},child: Card(child: Container(),),),
-              ))
+            if (SnapShot.hasData) {
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1.0),
+                itemCount: 207,
+                itemBuilder: (BuildContext context, index) => SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Card(
+                      child: Container(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                SnapShot.data[index]['country'],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
       ),
