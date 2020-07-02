@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/totalCases.dart';
 import 'package:flutter_app/components/worldCases.dart';
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     this.getJsonData();
   }
 
-  navigatetoCountry() async {
+  navigateToCountry() async {
     await Navigator.push(context, MaterialPageRoute(builder: (context)=>WorldClass()))
   }
 
@@ -38,14 +39,14 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder<TotalCases>(
         future: getJsonData(),
-        builder: (BuildContext context, Snapshot) {
-          if (Snapshot.hasData) {
-            final covid = Snapshot.data;
+        builder: (BuildContext context, snapShot) {
+          if (snapShot.hasData) {
+            final covid = snapShot.data;
             return Column(
               children: <Widget>[], //access data with "${covid.cases}"
             );
-          } else if (Snapshot.hasError) {
-            return Text(Snapshot.error.toString());
+          } else if (snapShot.hasError) {
+            return Text(snapShot.error.toString());
           } else
             return CircularProgressIndicator();
         },
