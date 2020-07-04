@@ -7,9 +7,9 @@ class TotalCases {
 
   factory TotalCases.fromJson(final json) {
     return TotalCases(
-      cases: json["cases"],
-      deaths: json["deaths"],
-      recovered: json["recovered"],
+      cases: json["data"]["summary"]["total"],
+      deaths: json["data"]["summary"]["deaths"],
+      recovered: json["data"]["summary"]["discharged"],
     );
   }
 }
