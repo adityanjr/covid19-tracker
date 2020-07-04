@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/totalCases.dart';
 import 'package:flutter_app/components/worldCases.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_app/widgets/infoCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_app/constants.dart';
 
@@ -54,41 +54,18 @@ class _HomePageState extends State<HomePage> {
                     bottomRight: Radius.circular(50)),
               ),
               child: Wrap(
+                runSpacing: 20,
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                  color: kTextLightColor.withOpacity(.2),
-                                  shape: BoxShape.circle),
-                              child: SvgPicture.asset(
-                                "assets/icons/running.svg",
-                                height: 12,
-                                width: 12,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              "Confirmed Cases",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                  InfoCard(
+                    title: "Confirmed Cases",
+                    color: Colors.orange,
+                    effectedNum: covid.cases,
+                  ),
+                  InfoCard(
+                    title: "Deaths",
+                    color: Colors.red,
+                    effectedNum: covid.deaths,
+                  ),
                 ],
               ),
             );
