@@ -20,22 +20,24 @@ class _WorldClassState extends State<WorldClass> {
     datas = getData();
   }
 
-  Future showCard(String cases, todayDeath, death, recovered) async{
-    await showDialog(context: context, builder: (BuildContext context){
-      return AlertDialog(
-        shape: RoundedRectangleBorder(),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text("Total Cases: $cases"),
-              Text("Today's Death: $cases"),
-              Text("Total Deaths: $cases"),
-              Text("Total Recovered: $cases"),
-            ],
-          ),
-        ),
-      );
-    })
+  Future showCard(String cases, todayDeath, death, recovered) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Total Cases: $cases"),
+                  Text("Today's Death: $cases"),
+                  Text("Total Deaths: $cases"),
+                  Text("Total Recovered: $cases"),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -61,7 +63,7 @@ class _WorldClassState extends State<WorldClass> {
                   height: 50,
                   width: 50,
                   child: GestureDetector(
-                    onTap: ()=> showCard(
+                    onTap: () => showCard(
                       snapShot.data[index]['cases'].toString(),
                       snapShot.data[index]['todayDeaths'].toString(),
                       snapShot.data[index]['deaths'].toString(),
@@ -74,7 +76,8 @@ class _WorldClassState extends State<WorldClass> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text("Total Cases: ${snapShot.data[index]['cases'].toString()}"),
+                              Text(
+                                  "Total Cases: ${snapShot.data[index]['cases'].toString()}"),
                               Text(
                                 snapShot.data[index]['country'],
                                 style: TextStyle(
