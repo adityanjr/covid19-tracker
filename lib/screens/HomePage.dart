@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/totalCases.dart';
 import 'package:flutter_app/components/worldCases.dart';
+import 'package:flutter_app/widgets/helpCard.dart';
 import 'package:flutter_app/widgets/infoCard.dart';
 import 'package:flutter_app/widgets/preventionCard.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: kPrimaryColor.withOpacity(.03),
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Wrap(
                     runSpacing: 20,
-                    spacing: 20,
+                    spacing: 18,
                     children: <Widget>[
                       InfoCard(
                         title: "Confirmed",
@@ -91,15 +92,15 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        "Preventions",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 20,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          "Preventions",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,12 +120,9 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 15,
                       ),
-                      Container(
-                        height: 10,
-                        width: double.infinity,
-                      )
+                      HelpCard()
                     ],
                   ),
                 ),
