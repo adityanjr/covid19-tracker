@@ -43,31 +43,57 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context, snapShot) {
           if (snapShot.hasData) {
             final covid = snapShot.data;
-            return Container(
-              padding:
-                  EdgeInsets.only(top: 20, left: 20, bottom: 40, right: 20),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: kPrimaryColor.withOpacity(.03),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50)),
-              ),
-              child: Wrap(
-                runSpacing: 20,
-                children: <Widget>[
-                  InfoCard(
-                    title: "Confirmed Cases",
-                    color: Colors.orange,
-                    effectedNum: covid.cases,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 20, left: 20, bottom: 40, right: 20),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor.withOpacity(.03),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50)),
                   ),
-                  InfoCard(
-                    title: "Deaths",
-                    color: Colors.red,
-                    effectedNum: covid.deaths,
+                  child: Wrap(
+                    runSpacing: 20,
+                    spacing: 20,
+                    children: <Widget>[
+                      InfoCard(
+                        title: "Confirmed Cases",
+                        color: Colors.orange,
+                        effectedNum: covid.cases,
+                      ),
+                      InfoCard(
+                        title: "Deaths",
+                        color: Colors.red,
+                        effectedNum: covid.deaths,
+                      ),
+                      InfoCard(
+                        title: "Recovered",
+                        color: Colors.green,
+                        effectedNum: covid.recovered,
+                      ),
+                      InfoCard(
+                        title: "Active Cases",
+                        color: Colors.blue,
+                        effectedNum: covid.cases,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Preventions",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
             );
           } else if (snapShot.hasError) {
             return Text(snapShot.error.toString());
