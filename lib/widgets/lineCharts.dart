@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class LineReportChart extends StatelessWidget {
+  final Color chartColor;
+
+  const LineReportChart({Key key, this.chartColor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -18,7 +21,7 @@ class LineReportChart extends StatelessWidget {
               isCurved: true,
               dotData: FlDotData(show: false),
               belowBarData: BarAreaData(show: false),
-              colors: [kPrimaryColor],
+              colors: [chartColor],
               barWidth: 4,
             )
           ])),

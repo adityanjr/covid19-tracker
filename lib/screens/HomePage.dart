@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/totalCases.dart';
 import 'package:flutter_app/components/worldCases.dart';
 import 'package:flutter_app/widgets/infoCard.dart';
+import 'package:flutter_app/widgets/preventionCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_app/constants.dart';
 
@@ -47,8 +48,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding:
-                      EdgeInsets.only(top: 20, left: 20, bottom: 40, right: 20),
+                  padding: EdgeInsets.all(20),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: kPrimaryColor.withOpacity(.03),
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     spacing: 20,
                     children: <Widget>[
                       InfoCard(
-                        title: "Confirmed Cases",
+                        title: "Confirmed",
                         color: Colors.orange,
                         effectedNum: covid.cases,
                       ),
@@ -84,14 +84,49 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                Text(
-                  "Preventions",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      .copyWith(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Preventions",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          PreventionCard(
+                            srcAsset: "assets/icons/hand_wash.svg",
+                            title: "Wash Hands",
+                          ),
+                          PreventionCard(
+                            srcAsset: "assets/icons/use_mask.svg",
+                            title: "Use Mask",
+                          ),
+                          PreventionCard(
+                            srcAsset: "assets/icons/Clean_Disinfect.svg",
+                            title: "Clean Disinfect",
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        height: 10,
+                        width: double.infinity,
+                      )
+                    ],
+                  ),
                 ),
               ],
             );

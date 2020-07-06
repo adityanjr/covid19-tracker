@@ -75,7 +75,9 @@ class InfoCard extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: LineReportChart(),
+                      child: LineReportChart(
+                        chartColor: color,
+                      ),
                     )
                   ],
                 ),
