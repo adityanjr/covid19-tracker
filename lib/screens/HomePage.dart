@@ -89,41 +89,43 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          "Preventions",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(fontWeight: FontWeight.bold),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            "Preventions",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          PreventionCard(
-                            srcAsset: "assets/icons/hand_wash.svg",
-                            title: "Wash Hands",
-                          ),
-                          PreventionCard(
-                            srcAsset: "assets/icons/use_mask.svg",
-                            title: "Use Mask",
-                          ),
-                          PreventionCard(
-                            srcAsset: "assets/icons/Clean_Disinfect.svg",
-                            title: "Clean Disinfect",
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      HelpCard()
-                    ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            PreventionCard(
+                              srcAsset: "assets/icons/hand_wash.svg",
+                              title: "Wash Hands",
+                            ),
+                            PreventionCard(
+                              srcAsset: "assets/icons/use_mask.svg",
+                              title: "Use Mask",
+                            ),
+                            PreventionCard(
+                              srcAsset: "assets/icons/Clean_Disinfect.svg",
+                              title: "Clean Disinfect",
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        HelpCard()
+                      ],
+                    ),
                   ),
                 ),
               ],
