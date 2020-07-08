@@ -1,8 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class LineReportChart extends StatelessWidget {
   final Color chartColor;
 
@@ -10,7 +8,7 @@ class LineReportChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 2.2,
+      aspectRatio: 2.5,
       child: LineChart(LineChartData(
           gridData: FlGridData(show: false),
           borderData: FlBorderData(show: false),
@@ -22,7 +20,7 @@ class LineReportChart extends StatelessWidget {
               dotData: FlDotData(show: false),
               belowBarData: BarAreaData(show: false),
               colors: [chartColor],
-              barWidth: 4,
+              barWidth: 3,
             )
           ])),
     );
@@ -31,9 +29,9 @@ class LineReportChart extends StatelessWidget {
 
 List<FlSpot> getSpots() {
   return [
-    FlSpot(0, .5),
-    FlSpot(1, 1.5),
-    FlSpot(2, .5),
+    FlSpot(0, .01),
+    FlSpot(1, .5),
+    FlSpot(2, .1),
     FlSpot(3, .7),
     FlSpot(4, .2),
     FlSpot(5, 2),
