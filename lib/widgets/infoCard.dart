@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../constants.dart';
 import 'lineCharts.dart';
 
 class InfoCard extends StatelessWidget {
@@ -24,63 +25,53 @@ class InfoCard extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3),
                 child: Row(
                   children: <Widget>[
                     Container(
                       alignment: Alignment.center,
-                      height: 30,
-                      width: 30,
+                      height: SizeConfig.safeBlockHorizontal * 8,
+                      width: SizeConfig.safeBlockVertical * 5,
                       decoration: BoxDecoration(
                           color: color.withOpacity(.2), shape: BoxShape.circle),
                       child: SvgPicture.asset(
                         "assets/icons/running.svg",
-                        height: 12,
-                        width: 12,
+                        height: SizeConfig.safeBlockHorizontal * 5,
                         color: color,
                       ),
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.safeBlockHorizontal * 2),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontFamily: "Kayak",
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        ),
+                      ),
                     )
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                            text: "$effectedNum\n",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text: "People",
-                            style: TextStyle(
-                                fontSize: 12, height: 2, color: Colors.black),
-                          ),
-                        ]),
-                      ),
+              Row(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.safeBlockHorizontal * 3),
+                      child: Text(
+                        "$effectedNum\n",
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Titillium",
+                            fontSize: SizeConfig.safeBlockHorizontal * 7),
+                      )),
+                  Expanded(
+                    child: LineReportChart(
+                      chartColor: color,
                     ),
-                    Expanded(
-                      child: LineReportChart(
-                        chartColor: color,
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               )
             ],
           ),
