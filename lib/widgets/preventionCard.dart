@@ -18,16 +18,17 @@ class PreventionCard extends StatelessWidget {
       children: <Widget>[
         SvgPicture.asset(
           srcAsset,
-          height: 60,
+          height: SizeConfig.safeBlockVertical * 9,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical),
           child: Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: kPrimaryColor),
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: kPrimaryColor,
+                fontFamily: "Titillium",
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.safeBlockVertical * 2.2),
           ),
         )
       ],
