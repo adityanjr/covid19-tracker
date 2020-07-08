@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/appBar.dart';
 import 'package:flutter_app/components/totalCases.dart';
 import 'package:flutter_app/components/worldCases.dart';
 import 'package:flutter_app/widgets/helpCard.dart';
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: buildAppBar(),
       body: FutureBuilder<TotalCases>(
@@ -46,29 +48,34 @@ class _HomePageState extends State<HomePage> {
           if (snapShot.hasData) {
             final covid = snapShot.data;
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
+                  padding: EdgeInsets.only(
+                    left: SizeConfig.safeBlockHorizontal * 4,
+                    right: SizeConfig.safeBlockHorizontal * 2,
+                    bottom: SizeConfig.safeBlockVertical * 3.5,
+                    top: SizeConfig.safeBlockVertical,
+                  ),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: kPrimaryColor.withOpacity(.03),
+                    color: kPrimaryColor.withOpacity(.07),
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50)),
+                        bottomLeft: Radius.circular(40),
+                        bottomRight: Radius.circular(40)),
                   ),
                   child: Wrap(
-                    runSpacing: 20,
-                    spacing: 18,
+                    runSpacing: SizeConfig.safeBlockVertical * 2,
+                    spacing: SizeConfig.safeBlockHorizontal * 3,
                     children: <Widget>[
                       InfoCard(
                         title: "Confirmed",
-                        color: Colors.orange,
+                        color: Colors.red,
                         effectedNum: covid.cases,
                       ),
                       InfoCard(
                         title: "Deaths",
-                        color: Colors.red,
+                        color: Colors.grey,
                         effectedNum: covid.deaths,
                       ),
                       InfoCard(
@@ -77,61 +84,57 @@ class _HomePageState extends State<HomePage> {
                         effectedNum: covid.recovered,
                       ),
                       InfoCard(
-                        title: "Active Cases",
+                        title: "Active",
                         color: Colors.blue,
-                        effectedNum: covid.cases,
+                        effectedNum: covid.cases - covid.recovered,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            "Preventions",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            PreventionCard(
-                              srcAsset: "assets/icons/hand_wash.svg",
-                              title: "Wash Hands",
-                            ),
-                            PreventionCard(
-                              srcAsset: "assets/icons/use_mask.svg",
-                              title: "Use Mask",
-                            ),
-                            PreventionCard(
-                              srcAsset: "assets/icons/Clean_Disinfect.svg",
-                              title: "Clean Disinfect",
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        HelpCard()
-                      ],
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.safeBlockHorizontal * 6,
+                          bottom: SizeConfig.safeBlockHorizontal * 4,
+                          top: SizeConfig.safeBlockHorizontal * 2),
+                      child: Text(
+                        "Preventions >",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Titillium",
+                            fontSize: SizeConfig.safeBlockVertical * 3),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.safeBlockHorizontal * 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          PreventionCard(
+                            srcAsset: "assets/icons/hand_wash.svg",
+                            title: "Wash Hands",
+                          ),
+                          PreventionCard(
+                            srcAsset: "assets/icons/use_mask.svg",
+                            title: "Use Mask",
+                          ),
+                          PreventionCard(
+                            srcAsset: "assets/icons/Clean_Disinfect.svg",
+                            title: "Distancing",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+                HelpCard()
               ],
             );
           } else if (snapShot.hasError) {
-            return Text(snapShot.error.toString());
+            return Text("internet to ON krle");
           } else
             return CircularProgressIndicator();
         },
