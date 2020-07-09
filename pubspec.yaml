@@ -25,13 +25,12 @@ dependencies:
     sdk: flutter
 
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   http: ^0.12.1
   dio: ^3.0.9
   flutter_svg: ^0.17.4
   fl_chart: ^0.9.3
+  font_awesome_flutter: ^8.8.1
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +50,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/
+    - assets/covid_text.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -66,13 +66,13 @@ flutter:
   fonts:
     - family: Kayak
       fonts:
-        - asset: assets/Kayak Sans Regular.otf
+        - asset: assets/fonts/Kayak Sans Regular.otf
     - family: Moderne
       fonts:
-        - asset: assets/Moderne Sans Font.ttf
+        - asset: assets/fonts/Moderne Sans Font.ttf
     - family: Titillium
       fonts:
-        - asset: assets/TitilliumWeb.ttf
+        - asset: assets/fonts/TitilliumWeb.ttf
 
   # fonts:
   #   - family: Schyler
