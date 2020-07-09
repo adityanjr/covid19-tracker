@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/MainDrawer.dart';
 import 'screens/HomePage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Corona Tracker',
-      home: HomePage(),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          DrawerScreen(),
+          HomePage(),
+        ],
+      ),
     );
   }
 }
