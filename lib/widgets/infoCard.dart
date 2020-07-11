@@ -20,8 +20,6 @@ class InfoCard extends StatelessWidget {
       builder: (context, constraints) {
         return Container(
           width: constraints.maxWidth / 2 - 10,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(8)),
           child: Column(
             children: <Widget>[
               Padding(
