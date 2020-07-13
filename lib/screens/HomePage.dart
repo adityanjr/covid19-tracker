@@ -26,7 +26,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         key: _scaffoldKey,
         appBar: buildAppBar(_scaffoldKey, darkThemeEnabled),
-        drawer: buildDrawer(darkThemeEnabled),
+        drawer: ClipPath(
+          clipper: MyCustomClipper(),
+          child: buildDrawer(darkThemeEnabled),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
