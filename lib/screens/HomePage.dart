@@ -9,6 +9,8 @@ import 'package:flutter_app/widgets/infoCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_app/constants.dart';
 
+import 'details.dart';
+
 class HomePage extends StatelessWidget {
   final bool darkThemeEnabled;
   HomePage(this.darkThemeEnabled);
@@ -28,7 +30,7 @@ class HomePage extends StatelessWidget {
         appBar: buildAppBar(_scaffoldKey, darkThemeEnabled),
         drawer: ClipPath(
           clipper: MyCustomClipper(),
-          child: buildDrawer(darkThemeEnabled),
+          child: buildDrawer(context, darkThemeEnabled),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,21 +62,31 @@ class HomePage extends StatelessWidget {
                             title: "Confirmed",
                             color: Colors.red,
                             effectedNum: covid.cases,
+                            press: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailsScreen()),
+                              );
+                            },
                           ),
                           InfoCard(
                             title: "Deaths",
                             color: Colors.grey,
                             effectedNum: covid.deaths,
+                            press: () {},
                           ),
                           InfoCard(
                             title: "Recovered",
                             color: Colors.green,
                             effectedNum: covid.recovered,
+                            press: () {},
                           ),
                           InfoCard(
                             title: "Active",
                             color: Colors.blue,
                             effectedNum: covid.cases - covid.recovered,
+                            press: () {},
                           ),
                         ],
                       );
