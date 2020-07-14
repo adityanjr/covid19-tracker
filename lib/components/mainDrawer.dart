@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_app/constants.dart';
+import 'package:flutter_app/screens/HomePage.dart';
 import '../main.dart';
 
 class MyCustomClipper extends CustomClipper<Path> {
@@ -23,7 +24,7 @@ class MyCustomClipper extends CustomClipper<Path> {
   }
 }
 
-Drawer buildDrawer(darkThemeEnabled) {
+Drawer buildDrawer(context, darkThemeEnabled) {
   return Drawer(
     elevation: 3,
     child: Padding(
@@ -33,13 +34,21 @@ Drawer buildDrawer(darkThemeEnabled) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Image.asset(
-            "assets/covid_text.png",
+            darkThemeEnabled
+                ? "assets/covid_white.png"
+                : "assets/covid_black.png",
             width: SizeConfig.safeBlockHorizontal * 50,
           ),
           Column(
             children: <Widget>[
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(darkThemeEnabled)),
+                  );
+                },
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.home),
