@@ -30,6 +30,7 @@ dependencies:
   dio: ^3.0.9
   flutter_svg: ^0.17.4
   fl_chart: ^0.9.3
+  url_launcher: ^5.5.0
 
 dev_dependencies:
   flutter_test:
