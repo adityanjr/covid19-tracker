@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/screens/HomePage.dart';
+import 'package:flutter_app/screens/about.dart';
+import 'package:flutter_app/screens/countries.dart';
 import '../main.dart';
 
 class MyCustomClipper extends CustomClipper<Path> {
@@ -25,6 +27,11 @@ class MyCustomClipper extends CustomClipper<Path> {
 }
 
 Drawer buildDrawer(context, darkThemeEnabled) {
+  navigateToCountry() async {
+    await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => WorldClass()));
+  }
+
   return Drawer(
     elevation: 3,
     child: Padding(
@@ -60,7 +67,7 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () => navigateToCountry(),
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.map),
@@ -72,7 +79,13 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AboutPage(),
+                      ));
+                },
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.info),
