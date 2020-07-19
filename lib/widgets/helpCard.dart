@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 
@@ -8,57 +9,85 @@ class HelpCard extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  navigateToUrl(urlString) async {
+    if (await canLaunch(urlString)) {
+      await launch(urlString);
+    } else {
+      Center(
+        child: Text("Error 404"),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.safeBlockHorizontal * 5.5,
-            vertical: SizeConfig.safeBlockVertical * 3),
-        width: double.infinity,
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.4,
-                top: SizeConfig.safeBlockHorizontal * 4,
+      child: GestureDetector(
+        onTap: () => navigateToUrl(
+            "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public"),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.safeBlockHorizontal * 5.5,
+              vertical: SizeConfig.safeBlockVertical * 3.5),
+          width: double.infinity,
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.4,
+                    top: SizeConfig.safeBlockHorizontal * 4,
+                  ),
+                  height: SizeConfig.safeBlockVertical * 17,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Colors.blue[200], Colors.blue[600]]),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: SizeConfig.safeBlockVertical),
+                        child: Text(
+                          "WHO - Advice for Public",
+                          style: TextStyle(
+                              fontSize: SizeConfig.safeBlockVertical * 3,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Moderne"),
+                        ),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.safeBlockVertical * 1.5,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: SizeConfig.safeBlockHorizontal * 11),
+                        child: Text(
+                          "Be Aware!",
+                          style: TextStyle(
+                              fontFamily: "Kayak",
+                              color: Colors.white.withOpacity(.5)),
+                        ),
+                      )
+                    ],
+                  )),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: SizeConfig.safeBlockHorizontal,
+                    bottom: SizeConfig.safeBlockVertical),
+                child: SvgPicture.asset("assets/icons/nurse.svg"),
               ),
-              height: SizeConfig.safeBlockVertical * 16,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.blue[200], Colors.blue[600]]),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: "Dial 999 for \nMedical Help!\n",
-                      style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: Colors.white,
-                          fontFamily: "Moderne",
-                          fontSize: SizeConfig.safeBlockVertical * 2.5)),
-                  TextSpan(
-                      text: "If any symptoms appear",
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.3),
-                          fontFamily: "Kayak"))
-                ]),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: SizeConfig.safeBlockHorizontal,
-                  bottom: SizeConfig.safeBlockVertical),
-              child: SvgPicture.asset("assets/icons/nurse.svg"),
-            ),
-            Positioned(
-              top: SizeConfig.safeBlockVertical * 4,
-              right: SizeConfig.safeBlockHorizontal * 3,
-              child: SvgPicture.asset("assets/icons/virus.svg"),
-            )
-          ],
+              Positioned(
+                top: SizeConfig.safeBlockVertical * 12,
+                right: SizeConfig.safeBlockHorizontal * 4.5,
+                child: SvgPicture.asset("assets/icons/virus.svg"),
+              )
+            ],
+          ),
         ),
       ),
     );
