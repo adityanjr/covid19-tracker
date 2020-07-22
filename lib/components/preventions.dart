@@ -19,7 +19,7 @@ class Preventions extends StatelessWidget {
               bottom: SizeConfig.safeBlockHorizontal * 4,
               top: SizeConfig.safeBlockHorizontal * 2),
           child: Text(
-            "Preventions >",
+            "Preventions",
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: "Titillium",
