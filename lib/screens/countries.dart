@@ -66,9 +66,9 @@ class _WorldClassState extends State<WorldClass> {
                   child: GestureDetector(
                     onTap: () => showCard(
                       snapShot.data[index]['cases'].toString(),
-                      snapShot.data[index]['todayDeaths'].toString(),
-                      snapShot.data[index]['deaths'].toString(),
                       snapShot.data[index]['recovered'].toString(),
+                      snapShot.data[index]['active'].toString(),
+                      snapShot.data[index]['deaths'].toString(),
                     ),
                     child: Card(
                       child: Container(
@@ -88,9 +88,9 @@ class _WorldClassState extends State<WorldClass> {
                                 snapShot.data[index]['country'],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Titillium"),
                               )
                             ],
                           ),
