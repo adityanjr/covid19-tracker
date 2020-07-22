@@ -74,6 +74,9 @@ flutter:
     - family: Titillium
       fonts:
         - asset: assets/fonts/TitilliumWeb.ttf
+    - family: Yanone
+      fonts:
+        - asset: assets/fonts/YanoneKaffeesatz-Regular.ttf
 
   # fonts:
   #   - family: Schyler
