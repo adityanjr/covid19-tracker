@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/screens/HomePage.dart';
-import 'package:flutter_app/screens/about.dart';
 import 'package:flutter_app/screens/countries.dart';
 import '../main.dart';
 
@@ -40,11 +39,14 @@ Drawer buildDrawer(context, darkThemeEnabled) {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image.asset(
-            darkThemeEnabled
-                ? "assets/covid_white.png"
-                : "assets/covid_black.png",
-            width: SizeConfig.safeBlockHorizontal * 50,
+          Padding(
+            padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 2),
+            child: Image.asset(
+              darkThemeEnabled
+                  ? "assets/covid_white.png"
+                  : "assets/covid_black.png",
+              width: SizeConfig.safeBlockHorizontal * 50,
+            ),
           ),
           Column(
             children: <Widget>[
@@ -62,7 +64,12 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("HomePage")
+                    Text(
+                      "HomePage",
+                      style: TextStyle(
+                          fontFamily: "Titillium",
+                          fontSize: SizeConfig.safeBlockVertical * 3),
+                    )
                   ],
                 ),
               ),
@@ -70,21 +77,28 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                 onPressed: () => navigateToCountry(),
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.map),
+                    Icon(Icons.flag),
                     SizedBox(
                       width: 10,
                     ),
-                    Text("Countries")
+                    Text(
+                      "Countries",
+                      style: TextStyle(
+                          fontFamily: "Titillium",
+                          fontSize: SizeConfig.safeBlockVertical * 3),
+                    )
                   ],
                 ),
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AboutPage(),
-                      ));
+                  showAboutDialog(
+                      context: context,
+                      applicationIcon: Icon(Icons.flash_on),
+                      applicationName: "Covid Tracker",
+                      applicationVersion: 'v1.0',
+                      applicationLegalese:
+                          "This app tracks number of cases of corona across India and other countries.");
                 },
                 child: Row(
                   children: <Widget>[
@@ -92,7 +106,12 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("About")
+                    Text(
+                      "About",
+                      style: TextStyle(
+                          fontFamily: "Titillium",
+                          fontSize: SizeConfig.safeBlockVertical * 3),
+                    )
                   ],
                 ),
               ),
@@ -100,8 +119,13 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(
-                        left: SizeConfig.safeBlockHorizontal * 5),
-                    child: Text("Dark"),
+                        left: SizeConfig.safeBlockHorizontal * 6),
+                    child: Text(
+                      "Dark",
+                      style: TextStyle(
+                          fontFamily: "Titillium",
+                          fontSize: SizeConfig.safeBlockVertical * 4),
+                    ),
                   ),
                   SizedBox(
                     width: 10,
@@ -116,7 +140,13 @@ Drawer buildDrawer(context, darkThemeEnabled) {
           ),
           Row(
             children: <Widget>[
-              Text("Covid Tracker"),
+              Text(
+                "Covid Tracker",
+                style: TextStyle(
+                    fontFamily: "Yanone",
+                    fontSize: SizeConfig.blockSizeVertical * 2.5,
+                    color: Colors.blue),
+              ),
               SizedBox(
                 width: 5,
               ),
@@ -128,7 +158,12 @@ Drawer buildDrawer(context, darkThemeEnabled) {
               SizedBox(
                 width: 5,
               ),
-              Text("© Aditya Singh")
+              Text(
+                "© Aditya Singh",
+                style: TextStyle(
+                    fontFamily: "Yanone",
+                    fontSize: SizeConfig.blockSizeVertical * 2.5),
+              )
             ],
           )
         ],
