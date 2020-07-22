@@ -15,11 +15,19 @@ class HomePage extends StatelessWidget {
   final bool darkThemeEnabled;
   HomePage(this.darkThemeEnabled);
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final String url = "https://api.rootnet.in/covid19-in/stats/latest";
-  Future<TotalCases> getJsonData() async {
-    var response = await http.get(Uri.encodeFull(url));
+  final String indiaCases = "https://disease.sh/v3/covid-19/countries/india";
+  Future<TotalCases> getIndiaData() async {
+    var response = await http.get(Uri.encodeFull(indiaCases));
     final convertDataJson = jsonDecode(response.body);
     return TotalCases.fromJson(convertDataJson);
+  }
+
+  final String weekCases =
+      "https://disease.sh/v3/covid-19/historical/india?lastdays=7";
+  Future<WeeklyCases> getWeeklyData() async {
+    var response = await http.get(Uri.encodeFull(weekCases));
+    final convertDataJson = jsonDecode(response.body);
+    return WeeklyCases.fromJson(convertDataJson);
   }
 
   @override
@@ -39,7 +47,7 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: SizeConfig.safeBlockHorizontal * 4,
                 right: SizeConfig.safeBlockHorizontal * 2,
-                bottom: SizeConfig.safeBlockVertical * 3.5,
+                bottom: SizeConfig.safeBlockVertical,
                 top: SizeConfig.safeBlockVertical,
               ),
               width: double.infinity,
@@ -50,12 +58,12 @@ class HomePage extends StatelessWidget {
                     bottomRight: Radius.circular(40)),
               ),
               child: FutureBuilder<TotalCases>(
-                  future: getJsonData(),
+                  future: getIndiaData(),
                   builder: (BuildContext context, snapShot) {
                     if (snapShot.hasData) {
                       final covid = snapShot.data;
                       return Wrap(
-                        runSpacing: SizeConfig.safeBlockVertical * 2,
+                        runSpacing: SizeConfig.safeBlockVertical,
                         spacing: SizeConfig.safeBlockHorizontal * 3,
                         children: <Widget>[
                           InfoCard(
@@ -85,7 +93,7 @@ class HomePage extends StatelessWidget {
                           InfoCard(
                             title: "Active",
                             color: Colors.blue,
-                            effectedNum: covid.cases - covid.recovered,
+                            effectedNum: covid.active,
                             press: () {},
                           ),
                         ],
