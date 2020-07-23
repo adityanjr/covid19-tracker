@@ -49,15 +49,15 @@ class HelpCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding:
-                            EdgeInsets.only(top: SizeConfig.safeBlockVertical),
+                        padding: EdgeInsets.only(
+                            top: SizeConfig.safeBlockVertical * 0.5),
                         child: Text(
                           "WHO - Advice for Public",
                           style: TextStyle(
-                              fontSize: SizeConfig.safeBlockVertical * 3,
+                              fontSize: SizeConfig.safeBlockVertical * 3.8,
                               color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Moderne"),
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Yanone"),
                         ),
                       ),
                       SizedBox(
@@ -65,7 +65,7 @@ class HelpCard extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: SizeConfig.safeBlockHorizontal * 11),
+                            left: SizeConfig.safeBlockHorizontal * 12),
                         child: Text(
                           "Be Aware!",
                           style: TextStyle(
@@ -82,7 +82,7 @@ class HelpCard extends StatelessWidget {
                 child: SvgPicture.asset("assets/icons/nurse.svg"),
               ),
               Positioned(
-                top: SizeConfig.safeBlockVertical * 12,
+                top: SizeConfig.safeBlockVertical * 15,
                 right: SizeConfig.safeBlockHorizontal * 4.5,
                 child: SvgPicture.asset("assets/icons/virus.svg"),
               )

@@ -27,7 +27,7 @@ class InfoCard extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3),
+                  padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 2),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -45,11 +45,11 @@ class InfoCard extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: SizeConfig.safeBlockHorizontal * 2),
+                            left: SizeConfig.safeBlockHorizontal * 1.5),
                         child: Text(
                           title,
                           style: TextStyle(
-                            fontFamily: "Kayak",
+                            fontFamily: "Titillium",
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
@@ -61,13 +61,13 @@ class InfoCard extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                         padding: EdgeInsets.only(
-                            left: SizeConfig.safeBlockHorizontal * 3),
+                            left: SizeConfig.safeBlockHorizontal * 2),
                         child: Text(
                           "$effectedNum\n",
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               fontWeight: FontWeight.bold,
                               fontFamily: "Titillium",
-                              fontSize: SizeConfig.safeBlockHorizontal * 7),
+                              fontSize: SizeConfig.safeBlockHorizontal * 8),
                         )),
                     Expanded(
                       child: LineReportChart(

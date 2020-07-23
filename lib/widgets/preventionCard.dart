@@ -18,7 +18,7 @@ class PreventionCard extends StatelessWidget {
       children: <Widget>[
         SvgPicture.asset(
           srcAsset,
-          height: SizeConfig.safeBlockVertical * 9,
+          height: SizeConfig.safeBlockVertical * 10,
         ),
         Padding(
           padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical),
@@ -27,8 +27,8 @@ class PreventionCard extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: kPrimaryColor,
                 fontFamily: "Titillium",
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.safeBlockVertical * 2.2),
+                fontWeight: FontWeight.w700,
+                fontSize: SizeConfig.safeBlockVertical * 2),
           ),
         )
       ],
