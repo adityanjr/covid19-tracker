@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/appBar.dart';
 import 'package:flutter_app/components/mainDrawer.dart';
 import 'package:flutter_app/components/preventions.dart';
 import 'package:flutter_app/components/totalCases.dart';
@@ -8,13 +7,11 @@ import 'package:flutter_app/widgets/helpCard.dart';
 import 'package:flutter_app/widgets/infoCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_app/constants.dart';
-
 import 'details.dart';
 
 class HomePage extends StatelessWidget {
   final bool darkThemeEnabled;
   HomePage(this.darkThemeEnabled);
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final String indiaCases = "https://disease.sh/v3/covid-19/countries/india";
   Future<TotalCases> getIndiaData() async {
     var response = await http.get(Uri.encodeFull(indiaCases));
@@ -22,20 +19,23 @@ class HomePage extends StatelessWidget {
     return TotalCases.fromJson(convertDataJson);
   }
 
-  final String weekCases =
-      "https://disease.sh/v3/covid-19/historical/india?lastdays=7";
-  Future<WeeklyCases> getWeeklyData() async {
-    var response = await http.get(Uri.encodeFull(weekCases));
-    final convertDataJson = jsonDecode(response.body);
-    return WeeklyCases.fromJson(convertDataJson);
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        key: _scaffoldKey,
-        appBar: buildAppBar(_scaffoldKey, darkThemeEnabled),
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor.withOpacity(.07),
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.blue),
+          title: Text(
+            "Covid Tracker",
+            style: TextStyle(
+                color: darkThemeEnabled ? Colors.white : Colors.black,
+                fontFamily: 'Titillium',
+                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.safeBlockVertical * 3),
+          ),
+        ),
         drawer: ClipPath(
           clipper: MyCustomClipper(),
           child: buildDrawer(context, darkThemeEnabled),
