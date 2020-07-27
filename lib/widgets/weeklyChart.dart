@@ -3,6 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class WeeklyChart extends StatelessWidget {
+  final covid;
+  WeeklyChart(this.covid);
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
