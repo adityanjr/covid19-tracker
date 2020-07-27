@@ -52,9 +52,9 @@ class HelpCard extends StatelessWidget {
                         padding: EdgeInsets.only(
                             top: SizeConfig.safeBlockVertical * 0.5),
                         child: Text(
-                          "WHO - Advice for Public",
+                          "Advice for Public",
                           style: TextStyle(
-                              fontSize: SizeConfig.safeBlockVertical * 3.8,
+                              fontSize: SizeConfig.safeBlockVertical * 4.5,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Yanone"),
@@ -82,7 +82,7 @@ class HelpCard extends StatelessWidget {
                 child: SvgPicture.asset("assets/icons/nurse.svg"),
               ),
               Positioned(
-                top: SizeConfig.safeBlockVertical * 15,
+                top: SizeConfig.safeBlockVertical * 14,
                 right: SizeConfig.safeBlockHorizontal * 4.5,
                 child: SvgPicture.asset("assets/icons/virus.svg"),
               )
