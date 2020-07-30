@@ -1,35 +1,29 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'screens/HomePage.dart';
+import 'package:flutter_app/screens/loading.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
-void main() {
-  runApp(MaterialApp(home: MyApp()));
-}
+void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isDark;
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: bloc.darkThemeEnabled,
-      initialData: false,
-      builder: (context, snapshot) => MaterialApp(
-          theme: snapshot.data ? ThemeData.dark() : ThemeData.light(),
-          home: HomePage(snapshot.data)),
+    return DynamicTheme(
+      defaultBrightness: Brightness.light,
+      data: (brightness) => ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: brightness,
+        fontFamily: 'google',
+      ),
+      themedWidgetBuilder: (context, theme) {
+        return MaterialApp(
+          title: 'COVID-19 Tracker',
+          theme: theme,
+          //  don't forget to uncomment the following line.
+          home: LoadingScreen(),
+          routes: {},
+          // home: ChartsScreen(),
+        );
+      },
     );
   }
 }
-
-class Bloc {
-  // ignore: close_sinks
-  final _themeController = StreamController<bool>();
-  get changeTheme => _themeController.sink.add;
-  get darkThemeEnabled => _themeController.stream;
-}
-
-final bloc = Bloc();
