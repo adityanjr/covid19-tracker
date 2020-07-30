@@ -1,10 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_app/constants.dart';
-import 'package:flutter_app/screens/HomePage.dart';
 import 'package:flutter_app/screens/countries.dart';
-import '../main.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyCustomClipper extends CustomClipper<Path> {
   @override
@@ -25,12 +25,7 @@ class MyCustomClipper extends CustomClipper<Path> {
   }
 }
 
-Drawer buildDrawer(context, darkThemeEnabled) {
-  navigateToCountry() async {
-    await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WorldClass()));
-  }
-
+Drawer buildDrawer(context, isLight, widget) {
   return Drawer(
     elevation: 3,
     child: Padding(
@@ -42,9 +37,7 @@ Drawer buildDrawer(context, darkThemeEnabled) {
           Padding(
             padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 2),
             child: Image.asset(
-              darkThemeEnabled
-                  ? "assets/covid_white.png"
-                  : "assets/covid_black.png",
+              isLight ? "assets/covid_black.png" : "assets/covid_white.png",
               width: SizeConfig.safeBlockHorizontal * 50,
             ),
           ),
@@ -52,11 +45,7 @@ Drawer buildDrawer(context, darkThemeEnabled) {
             children: <Widget>[
               FlatButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(darkThemeEnabled)),
-                  );
+                  Navigator.pop(context);
                 },
                 child: Row(
                   children: <Widget>[
@@ -67,14 +56,30 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                     Text(
                       "HomePage",
                       style: TextStyle(
-                          fontFamily: "Titillium",
-                          fontSize: SizeConfig.safeBlockVertical * 3),
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
               ),
               FlatButton(
-                onPressed: () => navigateToCountry(),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 800),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          CountriesInfoScreen(
+                        countryVirusData: widget.countriesData,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeScaleTransition(
+                            animation: animation, child: child);
+                      },
+                    ),
+                  );
+                },
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.flag),
@@ -84,8 +89,63 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                     Text(
                       "Countries",
                       style: TextStyle(
-                          fontFamily: "Titillium",
-                          fontSize: SizeConfig.safeBlockVertical * 3),
+                          fontFamily: "google", fontSize: yMargin(2.5)),
+                    )
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Row(
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/icons/india.svg",
+                      height: yMargin(4.5),
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Indian States",
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
+                    )
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Row(
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/icons/virus.svg",
+                      height: yMargin(3.3),
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "About Covid-19",
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
+                    )
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.refresh),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Refresh Data",
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
@@ -109,43 +169,24 @@ Drawer buildDrawer(context, darkThemeEnabled) {
                     Text(
                       "About",
                       style: TextStyle(
-                          fontFamily: "Titillium",
-                          fontSize: SizeConfig.safeBlockVertical * 3),
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: SizeConfig.safeBlockHorizontal * 6),
-                    child: Text(
-                      "Dark",
-                      style: TextStyle(
-                          fontFamily: "Titillium",
-                          fontSize: SizeConfig.safeBlockVertical * 4),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Switch(
-                    value: darkThemeEnabled,
-                    onChanged: bloc.changeTheme,
-                  ),
-                ],
-              )
             ],
           ),
           Row(
             children: <Widget>[
-              Text(
-                "Covid Tracker",
-                style: TextStyle(
-                    fontFamily: "Yanone",
-                    fontSize: SizeConfig.blockSizeVertical * 2.5,
-                    color: Colors.blue),
+              Padding(
+                padding: EdgeInsets.only(left: xMargin(5)),
+                child: Text(
+                  "Covid Tracker",
+                  style: TextStyle(
+                      fontFamily: "Yanone",
+                      fontSize: SizeConfig.blockSizeVertical * 2.5,
+                      color: Colors.blue),
+                ),
               ),
               SizedBox(
                 width: 5,
