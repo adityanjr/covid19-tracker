@@ -1,111 +1,160 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants.dart';
+import 'package:flutter_app/data/country_virus_data.dart';
+import 'package:flutter_app/widgets/dataList.dart';
 
-class WorldClass extends StatefulWidget {
+import 'charts.dart';
+
+class CountriesInfoScreen extends StatefulWidget {
+  static const routeName = '/countries-info-screen';
+
+  final countryVirusData;
+  CountriesInfoScreen({this.countryVirusData});
   @override
-  _WorldClassState createState() => _WorldClassState();
+  CountriesInfoScreenState createState() => CountriesInfoScreenState();
 }
 
-class _WorldClassState extends State<WorldClass> {
-  final String url = "https://corona.lmao.ninja/v2/countries";
-  Future<List> datas;
-  Future<List> getData() async {
-    var response = await Dio().get(url);
-    return response.data;
-  }
+class CountriesInfoScreenState extends State<CountriesInfoScreen> {
+  CountryVirusData locationData;
+  List<CountryVirusData> countriesData = [];
+  List<CountryVirusData> countriesForDisplay = [];
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    updateCountriesUI(widget.countryVirusData);
     super.initState();
-    datas = getData();
   }
 
-  Future showCard(String cases, active, deaths, recovered) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text("Cases: $cases"),
-                  Text("Recovered: $recovered"),
-                  Text("Active: $active"),
-                  Text("Deaths: $deaths"),
-                ],
-              ),
+  void updateCountriesUI(dynamic virusData) {
+    setState(() {
+      if (virusData == null) {
+        locationData = CountryVirusData(
+          country: 'none',
+          confirmedCases: 0,
+          recovered: 0,
+          deaths: 0,
+        );
+        print('error Null data obtained');
+        return;
+      }
+      for (var eachData in virusData) {
+        final countryData = CountryVirusData(
+          country: eachData['country'] ?? 'None',
+          confirmedCases: eachData['cases'] ?? 0,
+          recovered: eachData['recovered'] ?? 0,
+          deaths: eachData['deaths'] ?? 0,
+          flagUrl: eachData['countryInfo']['flag'] ?? ">>",
+        );
+        countriesData.add(countryData);
+      }
+      countriesForDisplay = countriesData;
+    });
+  }
+
+  Widget buildList() {
+    return Expanded(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 5,
+            childAspectRatio: 1.0),
+        itemCount: countriesForDisplay.length,
+        itemBuilder: (ctx, index) => buildCard(index),
+      ),
+    );
+  }
+
+  _searchBar() {
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: TextField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+          ),
+          labelText: 'Search Countries',
+          hintText: 'Type India',
+        ),
+        onChanged: (text) {
+          text = text.toLowerCase();
+          setState(() {
+            countriesForDisplay = countriesData.where((c) {
+              var cName = c.country.toLowerCase();
+              return cName.contains(text);
+            }).toList();
+          });
+        },
+      ),
+    );
+  }
+
+  Widget buildCard(int index) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChartsScreen(
+            countryName: '${countriesForDisplay[index].country}',
+            cases: double.parse('${countriesForDisplay[index].confirmedCases}'),
+            deaths: double.parse('${countriesForDisplay[index].deaths}'),
+            recovered: double.parse('${countriesForDisplay[index].recovered}'),
+          ),
+        ),
+      ),
+      child: Card(
+        elevation: 2,
+        child: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text("Cases: ${countriesForDisplay[index].confirmedCases}"),
+                Container(
+                  child: Image.network(countriesForDisplay[index].flagUrl),
+                  height: yMargin(5),
+                ),
+                Text(
+                  "${index + 1}.  ${countriesForDisplay[index].country}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontFamily: "Titillium"),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Affected Countries"),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: FutureBuilder(
-          future: datas,
-          builder: (BuildContext context, snapShot) {
-            if (snapShot.hasData) {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1.0),
-                itemCount: 215,
-                itemBuilder: (BuildContext context, index) => SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: GestureDetector(
-                    onTap: () => showCard(
-                      snapShot.data[index]['cases'].toString(),
-                      snapShot.data[index]['recovered'].toString(),
-                      snapShot.data[index]['active'].toString(),
-                      snapShot.data[index]['deaths'].toString(),
-                    ),
-                    child: Card(
-                      child: Container(
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                  "Cases: ${snapShot.data[index]['cases'].toString()}"),
-                              Container(
-                                child: Image.network(snapShot.data[index]
-                                    ['countryInfo']['flag']),
-                                height: SizeConfig.safeBlockVertical * 5,
-                              ),
-                              Text(
-                                snapShot.data[index]['country'],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Titillium"),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+        title: Text("All Countries"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () => _scaffoldKey.currentState.showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Data Source: https://www.worldometers.info/coronavirus/',
+                  textAlign: TextAlign.center,
                 ),
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _searchBar(),
+          buildList(),
+        ],
       ),
     );
   }
