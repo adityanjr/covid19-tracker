@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/data/country_virus_data.dart';
-import 'package:flutter_app/widgets/dataList.dart';
 
 import 'charts.dart';
 
@@ -57,7 +56,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 8,
+            crossAxisSpacing: 5,
             mainAxisSpacing: 5,
             childAspectRatio: 1.0),
         itemCount: countriesForDisplay.length,
@@ -68,11 +67,11 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
 
   _searchBar() {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(8),
       child: TextField(
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(8),
           ),
           labelText: 'Search Countries',
           hintText: 'Type India',
@@ -149,12 +148,14 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _searchBar(),
-          buildList(),
-        ],
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            _searchBar(),
+            buildList(),
+          ],
+        ),
       ),
     );
   }
