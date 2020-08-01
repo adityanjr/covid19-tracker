@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/loading.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-void main() => runApp(Phoenix(child: MyApp()));
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override

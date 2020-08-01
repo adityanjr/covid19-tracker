@@ -1,19 +1,17 @@
 import 'package:animations/animations.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/mainDrawer.dart';
 import 'package:flutter_app/data/country_virus_data.dart';
 import 'package:flutter_app/data/virus_data.dart';
-import 'package:flutter_app/screens/aboutCovid.dart';
-import 'package:flutter_app/screens/charts.dart';
-import 'package:flutter_app/screens/liveMap.dart';
+import 'package:flutter_app/screens/prevention.dart';
 import 'package:flutter_app/screens/states.dart';
-import 'package:flutter_app/widgets/mainDrawer.dart';
-import 'package:flutter_app/widgets/preventionCard.dart';
+import 'package:flutter_app/widgets/liveMap.dart';
 import 'package:flutter_app/widgets/infoCard.dart';
 import 'package:flutter_app/constants.dart';
-import 'package:flutter_app/widgets/widgetCard.dart';
-import 'package:flutter_app/widgets/worldCard.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_app/widgets/preventionCard.dart';
+
+import 'countries.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -77,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           recovered: 0,
           deaths: 0,
         );
-        print('null');
+        print('error Null data obtained');
         return;
       }
       for (var eachData in virusData) {
@@ -127,11 +125,7 @@ class _HomePageState extends State<HomePage> {
           iconTheme: IconThemeData(color: Colors.blue),
           title: Text(
             "Covid Tracker",
-            style: TextStyle(
-              color: isLight ? Colors.black : Colors.white,
-              fontSize: yMargin(3.2),
-              fontFamily: 'Titillium',
-            ),
+            style: TextStyle(color: isLight ? Colors.black : Colors.white),
           ),
           actions: <Widget>[
             IconButton(
@@ -168,19 +162,18 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(
                 left: xMargin(2),
                 right: xMargin(2),
-                top: yMargin(0.2),
+                top: yMargin(1),
               ),
               width: double.infinity,
               decoration: BoxDecoration(
                 color: kPrimaryColor.withOpacity(.07),
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40)),
               ),
               child: Wrap(
-                spacing: xMargin(3),
-                alignment: WrapAlignment.spaceEvenly,
-                runSpacing: yMargin(2),
+                runSpacing: yMargin(1),
+                spacing: xMargin(2),
                 children: <Widget>[
                   InfoCard(
                     title: "Confirmed",
@@ -191,7 +184,6 @@ class _HomePageState extends State<HomePage> {
                     title: "Deaths",
                     color: Colors.grey,
                     effectedNum: locationData.deaths,
-                    spot: "death",
                   ),
                   InfoCard(
                     title: "Recovered",
@@ -204,118 +196,98 @@ class _HomePageState extends State<HomePage> {
                     effectedNum: locationData.active,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: xMargin(4)),
-                        child: FlatButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChartsScreen(
-                                countryName: '${locationData.country}',
-                                cases: double.parse(
-                                    '${locationData.confirmedCases}'),
-                                deaths: double.parse('${locationData.deaths}'),
-                                recovered:
-                                    double.parse('${locationData.recovered}'),
-                              ),
-                            ),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Text("Infographs"),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              SvgPicture.asset(
-                                "assets/icons/increase.svg",
-                                color: Colors.red,
-                              )
-                            ],
-                          ),
+                        padding: EdgeInsets.only(right: 15, bottom: 15),
+                        child: Text(
+                          "Last updated: ${DateTime.now().toString().substring(0, 10)}",
+                          style: TextStyle(fontSize: 10),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: yMargin(1), right: xMargin(6)),
-                        child: Text(
-                          "Location: ${locationData.country}\nLast updated: ${DateTime.now().toString().substring(0, 10)}",
-                          style: TextStyle(fontSize: yMargin(1.4)),
-                        ),
-                      )
                     ],
                   ),
                 ],
               ),
             ),
-            WorldCard(
-              widget: widget,
-              cases: data.confirmedCases,
-              deaths: data.deaths,
-              isLight: isLight,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: xMargin(5)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => AboutCovid()));
-                    },
-                    child: WidgetCard(
-                      srcAsset: "assets/icons/virus.svg",
-                      title: "COVID-19",
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: Duration(milliseconds: 800),
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  StatesInfoScreen(
-                            stateVirusData: widget.statesData,
-                          ),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            return SharedAxisTransition(
-                              child: child,
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              transitionType: SharedAxisTransitionType.scaled,
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    child: WidgetCard(
-                      srcAsset: "assets/icons/india.svg",
-                      title: "Indian States",
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () => Navigator.push(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => MapsScreen(),
-                      ),
-                    ),
-                    child: WidgetCard(
-                        srcAsset: "assets/icons/live-map.svg",
-                        title: "Live Map"),
+                      PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 500),
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            CountriesInfoScreen(
+                          countryVirusData: widget.countriesData,
+                        ),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return FadeScaleTransition(
+                              animation: animation, child: child);
+                        },
+                      )),
+                  child: PreventionCard(
+                    srcAsset: "assets/icons/world.svg",
+                    title: "Countries",
+                    color: isLight ? Colors.black : Colors.white,
                   ),
-                ],
-              ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    return Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 800),
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            PreventionScreen(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return SharedAxisTransition(
+                            child: child,
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            transitionType: SharedAxisTransitionType.scaled,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: PreventionCard(
+                      srcAsset: "assets/icons/Clean_Disinfect.svg",
+                      title: "Preventions"),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 800),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          StatesInfoScreen(
+                        stateVirusData: widget.statesData,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return SharedAxisTransition(
+                          child: child,
+                          animation: animation,
+                          secondaryAnimation: secondaryAnimation,
+                          transitionType: SharedAxisTransitionType.scaled,
+                        );
+                      },
+                    ),
+                  ),
+                  child: PreventionCard(
+                    srcAsset: "assets/icons/india.svg",
+                    title: "India",
+                    color: isLight ? Colors.black : Colors.white,
+                  ),
+                ),
+              ],
             ),
-            PreventionCard(
-              isLight: isLight,
+            LiveMapCard(
+              index: index,
             )
           ],
         ));

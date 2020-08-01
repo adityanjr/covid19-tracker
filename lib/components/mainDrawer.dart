@@ -3,10 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_app/constants.dart';
-import 'package:flutter_app/screens/aboutCovid.dart';
 import 'package:flutter_app/screens/countries.dart';
-import 'package:flutter_app/screens/states.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MyCustomClipper extends CustomClipper<Path> {
@@ -31,8 +28,7 @@ class MyCustomClipper extends CustomClipper<Path> {
 Drawer buildDrawer(context, isLight, widget) {
   return Drawer(
     elevation: 3,
-    child: Container(
-      color: Colors.grey[300],
+    child: Padding(
       padding: EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -42,7 +38,7 @@ Drawer buildDrawer(context, isLight, widget) {
             padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 2),
             child: Image.asset(
               isLight ? "assets/covid_black.png" : "assets/covid_white.png",
-              width: xMargin(40),
+              width: SizeConfig.safeBlockHorizontal * 50,
             ),
           ),
           Column(
@@ -59,7 +55,8 @@ Drawer buildDrawer(context, isLight, widget) {
                     ),
                     Text(
                       "HomePage",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
@@ -91,74 +88,54 @@ Drawer buildDrawer(context, isLight, widget) {
                     ),
                     Text(
                       "Countries",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
               ),
               FlatButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 800),
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        StatesInfoScreen(stateVirusData: widget.statesData),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return SharedAxisTransition(
-                        child: child,
-                        animation: animation,
-                        secondaryAnimation: secondaryAnimation,
-                        transitionType: SharedAxisTransitionType.scaled,
-                      );
-                    },
-                  ),
-                ),
+                onPressed: () {},
                 child: Row(
                   children: <Widget>[
                     SvgPicture.asset(
                       "assets/icons/india.svg",
                       height: yMargin(4.5),
-                      color: isLight ? Colors.black : Colors.white,
+                      color: Colors.black,
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Text(
                       "Indian States",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
               ),
               FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => AboutCovid()));
-                },
+                onPressed: () {},
                 child: Row(
                   children: <Widget>[
                     SvgPicture.asset(
                       "assets/icons/virus.svg",
                       height: yMargin(3.3),
-                      color: isLight ? Colors.black : Colors.white,
+                      color: Colors.black,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
                       "About Covid-19",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
               ),
               FlatButton(
-                onPressed: () {
-                  Phoenix.rebirth(context);
-                },
+                onPressed: () {},
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.refresh),
@@ -167,7 +144,8 @@ Drawer buildDrawer(context, isLight, widget) {
                     ),
                     Text(
                       "Refresh Data",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
@@ -176,14 +154,11 @@ Drawer buildDrawer(context, isLight, widget) {
                 onPressed: () {
                   showAboutDialog(
                       context: context,
-                      applicationIcon: SvgPicture.asset(
-                        "assets/icons/virus.svg",
-                        height: 40,
-                      ),
-                      applicationName: "Covid Tracker\n",
-                      applicationVersion: 'v1.0.0',
+                      applicationIcon: Icon(Icons.flash_on),
+                      applicationName: "Covid Tracker",
+                      applicationVersion: 'v1.0',
                       applicationLegalese:
-                          "This app tracks number of cases of corona across your Location and other countries worldwide.\n\nRepo: github.com/adityanjr");
+                          "This app tracks number of cases of corona across India and other countries.");
                 },
                 child: Row(
                   children: <Widget>[
@@ -193,7 +168,8 @@ Drawer buildDrawer(context, isLight, widget) {
                     ),
                     Text(
                       "About",
-                      style: TextStyle(fontSize: yMargin(2.5)),
+                      style: TextStyle(
+                          fontFamily: "google", fontSize: yMargin(2.5)),
                     )
                   ],
                 ),
@@ -207,8 +183,8 @@ Drawer buildDrawer(context, isLight, widget) {
                 child: Text(
                   "Covid Tracker",
                   style: TextStyle(
-                      fontFamily: "Kayak",
-                      fontSize: yMargin(2),
+                      fontFamily: "Yanone",
+                      fontSize: SizeConfig.blockSizeVertical * 2.5,
                       color: Colors.blue),
                 ),
               ),
@@ -225,7 +201,9 @@ Drawer buildDrawer(context, isLight, widget) {
               ),
               Text(
                 "© Aditya Singh",
-                style: TextStyle(fontFamily: "Kayak", fontSize: yMargin(2)),
+                style: TextStyle(
+                    fontFamily: "Yanone",
+                    fontSize: SizeConfig.blockSizeVertical * 2.5),
               )
             ],
           )
