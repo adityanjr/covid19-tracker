@@ -44,7 +44,7 @@ class _ChartsScreenState extends State<ChartsScreen> {
         : await apiData.getCountryHistoricalData('${widget.countryName}');
     setState(() {
       if (histData == null || widget.cases == null) {
-        print('error Null data obtained');
+        print('null:data');
         return;
       }
 
@@ -109,12 +109,8 @@ class _ChartsScreenState extends State<ChartsScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          centerTitle: true,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () => Navigator.pop(context)),
+          title: Text('InfoGraphs'),
           bottom: TabBar(
-            indicatorColor: Colors.white,
             tabs: [
               Tab(icon: Icon(Icons.pie_chart)),
               Tab(icon: Icon(Icons.show_chart)),
@@ -133,133 +129,115 @@ class _ChartsScreenState extends State<ChartsScreen> {
               ),
             ),
           ],
-          title: Text('InfoGraphs'),
         ),
         body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(5),
               child: Container(
-                child: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        '${widget.countryName}',
-                        style: TextStyle(
-                            fontSize: 34.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent),
-                      ),
-                      SizedBox(height: 30),
-                      Text(
-                        'Cases: ${widget.cases.toStringAsFixed(0)}',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.amber),
-                      ),
-                      Text(
-                        'Deaths: ${widget.deaths.toStringAsFixed(0)}',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      ),
-                      Text(
-                        'Recovered: ${widget.recovered.toStringAsFixed(0)}',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green),
-                      ),
-                      SizedBox(height: 30),
-                      PieChart(
-                        dataMap: _dataMap,
-                        animationDuration: Duration(milliseconds: 800),
-                        chartLegendSpacing: 32.0,
-                        chartRadius: MediaQuery.of(context).size.width / 1.5,
-                        showChartValuesInPercentage: true,
-                        showChartValues: true,
-                        showChartValuesOutside: false,
-                        chartValueBackgroundColor: Colors.grey[200],
-                        colorList: [Colors.amber, Colors.red, Colors.green],
-                        showLegends: true,
-                        legendPosition: LegendPosition.top,
-                        decimalPlaces: 1,
-                        showChartValueLabel: true,
-                        initialAngle: 0,
-                        chartValueStyle: defaultChartValueStyle.copyWith(
-                          color: Colors.blueGrey[900].withOpacity(0.9),
-                        ),
-                        chartType: ChartType.disc,
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      '${widget.countryName}',
+                      style: TextStyle(
+                          fontSize: 34.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrangeAccent),
+                    ),
+                    Text(
+                      'Cases: ${widget.cases.toStringAsFixed(0)}',
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.amber),
+                    ),
+                    Text(
+                      'Deaths: ${widget.deaths.toStringAsFixed(0)}',
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                    Text(
+                      'Recovered: ${widget.recovered.toStringAsFixed(0)}',
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green),
+                    ),
+                    SizedBox(height: 30),
+                    PieChart(
+                      dataMap: _dataMap,
+                      animationDuration: Duration(milliseconds: 500),
+                      chartLegendSpacing: 30.0,
+                      chartRadius: MediaQuery.of(context).size.width / 2,
+                      showChartValuesInPercentage: true,
+                      showChartValues: true,
+                      showChartValuesOutside: true,
+                      chartValueBackgroundColor: Colors.grey[200],
+                      colorList: [Colors.amber, Colors.red, Colors.green],
+                      showLegends: true,
+                      legendPosition: LegendPosition.right,
+                      decimalPlaces: 1,
+                      showChartValueLabel: true,
+                      initialAngle: 0,
+                      chartType: ChartType.disc,
+                    ),
+                  ],
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(15),
               child: Container(
-                child: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        '${widget.countryName}',
-                        style: TextStyle(
-                            fontSize: 34.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent),
-                      ),
-                      SizedBox(height: 20),
-                      Expanded(
-                        child: charts.LineChart(_lineSeriesData,
-                            defaultRenderer: charts.LineRendererConfig(
-                              includeArea: true,
-                              stacked: true,
-                              roundEndCaps: true,
-                              includePoints: true,
-                              radiusPx: 2.5,
-                              includeLine: true,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      '${widget.countryName}',
+                      style: TextStyle(
+                          fontSize: 34.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrangeAccent),
+                    ),
+                    Expanded(
+                      child: charts.LineChart(_lineSeriesData,
+                          defaultRenderer: charts.LineRendererConfig(),
+                          animate: false,
+                          behaviors: [
+                            charts.ChartTitle(
+                              'Number of Cases',
+                              titleStyleSpec: charts.TextStyleSpec(
+                                fontFamily: 'google',
+                                color: charts.Color.fromHex(code: '#f7aa0f'),
+                              ),
+                              behaviorPosition: charts.BehaviorPosition.bottom,
+                              titleOutsideJustification:
+                                  charts.OutsideJustification.middleDrawArea,
                             ),
-                            animate: true,
-                            animationDuration: Duration(seconds: 1),
-                            behaviors: [
-                              charts.ChartTitle(
-                                'Number of Cases',
-                                titleStyleSpec: charts.TextStyleSpec(
-                                  fontFamily: 'google',
-                                  color: charts.Color.fromHex(code: '#f7aa0f'),
-                                ),
-                                behaviorPosition:
-                                    charts.BehaviorPosition.bottom,
-                                titleOutsideJustification:
-                                    charts.OutsideJustification.middleDrawArea,
+                            charts.ChartTitle(
+                              'Number of Deaths',
+                              titleStyleSpec: charts.TextStyleSpec(
+                                fontFamily: 'google',
+                                color: charts.Color.fromHex(code: '#c31432'),
                               ),
-                              charts.ChartTitle(
-                                'Number of Deaths',
-                                titleStyleSpec: charts.TextStyleSpec(
-                                  fontFamily: 'google',
-                                  color: charts.Color.fromHex(code: '#c31432'),
-                                ),
-                                behaviorPosition: charts.BehaviorPosition.start,
-                                titleOutsideJustification:
-                                    charts.OutsideJustification.middleDrawArea,
+                              behaviorPosition: charts.BehaviorPosition.end,
+                              titleOutsideJustification:
+                                  charts.OutsideJustification.middleDrawArea,
+                            ),
+                            charts.ChartTitle(
+                              'Number of people recovered',
+                              titleStyleSpec: charts.TextStyleSpec(
+                                fontFamily: 'google',
+                                color: charts.Color.fromHex(code: '#0f9b0f'),
                               ),
-                              charts.ChartTitle(
-                                'Number of people recovered',
-                                titleStyleSpec: charts.TextStyleSpec(
-                                  fontFamily: 'google',
-                                  color: charts.Color.fromHex(code: '#0f9b0f'),
-                                ),
-                                behaviorPosition: charts.BehaviorPosition.end,
-                                titleOutsideJustification:
-                                    charts.OutsideJustification.middleDrawArea,
-                              ),
-                            ]),
-                      ),
-                    ],
-                  ),
+                              behaviorPosition: charts.BehaviorPosition.start,
+                              titleOutsideJustification:
+                                  charts.OutsideJustification.middleDrawArea,
+                            ),
+                          ]),
+                    ),
+                  ],
                 ),
               ),
             ),

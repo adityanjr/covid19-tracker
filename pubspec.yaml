@@ -31,6 +31,17 @@ dependencies:
   flutter_svg: ^0.17.4
   fl_chart: ^0.9.3
   url_launcher: ^5.5.0
+  dynamic_theme: ^1.0.1
+  charts_flutter: ^0.9.0
+  flutter_spinkit: ^4.1.2
+  flutter_webview_plugin: ^0.3.10+1
+  geolocator: ^5.3.0
+  html:
+  pie_chart: ^3.1.1
+  video_player: ^0.10.8+1
+  animations: ^1.1.1
+  location: ^3.0.2
+  flutter_phoenix: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +63,8 @@ flutter:
     - assets/icons/
     - assets/covid_black.png
     - assets/covid_white.png
+    - assets/videos/covid.mkv
+    - assets/info/info.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -68,15 +81,13 @@ flutter:
     - family: Kayak
       fonts:
         - asset: assets/fonts/Kayak Sans Regular.otf
-    - family: Moderne
-      fonts:
-        - asset: assets/fonts/Moderne Sans Font.ttf
     - family: Titillium
       fonts:
         - asset: assets/fonts/TitilliumWeb.ttf
-    - family: Yanone
+    - family: google
       fonts:
-        - asset: assets/fonts/YanoneKaffeesatz-Regular.ttf
+        - asset: assets/fonts/google.ttf
+
 
   # fonts:
   #   - family: Schyler
