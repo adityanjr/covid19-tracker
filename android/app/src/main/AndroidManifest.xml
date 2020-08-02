@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Covid Tracker"
+        android:label="Covid-19 Tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

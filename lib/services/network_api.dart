@@ -9,7 +9,6 @@ class NetworkAPI {
   Future getData() async {
     http.Response response = await http.get(url);
 
-    // return if only request is successful
     if (response.statusCode == 200) {
       String data = response.body;
       return jsonDecode(data);

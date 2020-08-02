@@ -72,6 +72,7 @@ class WorldCard extends StatelessWidget {
                         child: Text(
                           "Cases: $cases\nDeaths: $deaths",
                           style: TextStyle(
+                              fontSize: yMargin(1.8),
                               fontFamily: "Kayak",
                               color: isLight ? Colors.black : Colors.white),
                         ),
@@ -79,11 +80,11 @@ class WorldCard extends StatelessWidget {
                     ],
                   )),
               Positioned(
-                top: yMargin(2),
-                left: xMargin(4),
+                top: yMargin(3),
+                left: xMargin(5),
                 child: SvgPicture.asset(
                   "assets/icons/globe.svg",
-                  height: 100,
+                  height: yMargin(13),
                 ),
               ),
               Positioned(
@@ -91,7 +92,7 @@ class WorldCard extends StatelessWidget {
                 right: xMargin(4.5),
                 child: SvgPicture.asset(
                   "assets/icons/patient.svg",
-                  height: 35,
+                  height: yMargin(5),
                 ),
               )
             ],

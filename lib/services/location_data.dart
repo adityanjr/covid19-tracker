@@ -7,11 +7,10 @@ import 'dart:io';
 class MyLocationData {
   double latitude = 0.0;
   double longitude = 0.0;
-  String country = '';
+  String country = 'India';
 
   Future<void> getLocationData() async {
     try {
-      // requesting location
       if (Platform.isAndroid || Platform.isIOS) {
         Position position = await Geolocator()
             .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -50,12 +49,22 @@ class MyLocationData {
           localeIdentifier: 'en_US');
       country = placemark[0].country;
 
-      //* Many More to do, Contribution required
       country == 'United States' ? country = 'USA' : country = country;
       country == 'United Kingdom' ? country = 'UK' : country = country;
+      country == 'India' ? country = 'IND' : country = country;
+      country == 'Bangladesh' ? country = 'BGD' : country = country;
+      country == 'Brazil' ? country = 'BRA' : country = country;
+      country == 'Canada' ? country = 'CAN' : country = country;
+      country == 'China' ? country = 'CHN' : country = country;
+      country == 'France' ? country = 'FRA' : country = country;
+      country == 'Germany' ? country = 'DEU' : country = country;
+      country == 'Italy' ? country = 'ITA' : country = country;
+      country == 'Nepal' ? country = 'NPL' : country = country;
+      country == 'Pakistan' ? country = 'PAK' : country = country;
+      country == 'Singapore' ? country = 'SGP' : country = country;
+
       print(country);
     } catch (e) {
-      // return 'Error in getting info of your country';
       print(e.toString());
     }
   }

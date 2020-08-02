@@ -82,7 +82,7 @@ class PreventionCard extends StatelessWidget {
                 left: xMargin(5),
                 child: SvgPicture.asset(
                   "assets/icons/nurse.svg",
-                  height: 85,
+                  height: yMargin(12),
                 ),
               ),
               Positioned(
@@ -90,7 +90,7 @@ class PreventionCard extends StatelessWidget {
                 right: xMargin(15),
                 child: SvgPicture.asset(
                   "assets/icons/hand-wash.svg",
-                  height: 25,
+                  height: yMargin(3.5),
                 ),
               )
             ],

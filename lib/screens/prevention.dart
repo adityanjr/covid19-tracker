@@ -20,7 +20,7 @@ class PreventionScreen extends StatelessWidget {
               headerTips("Know how COVID-19\nis Spread"),
               Text(
                   "• You can become infected by coming into close contact about 6 feet or two arm lengths with a person who has COVID-19. COVID-19 is primarily spread from person to person.\n• You can become infected from respiratory droplets when an infected person coughs, sneezes, or talks.\n • You may also be able to get it by touching a surface or object that has the virus on it, and then by touching your mouth, nose, or eyes"),
-              headerTips("Protect yourself and others\nfrom COVID-19"),
+              headerTips("Protect yourself and\nothers from COVID-19"),
               Text(
                   "• There is currently no vaccine to protect against COVID-19. The best way to protect yourself is to avoid being exposed to the virus that causes COVID-19.\n• Stay home as much as possible and avoid close contact with others.\n• Wear a cloth face covering that covers your nose and mouth in public settings.\n• Clean and disinfect frequently touched surfaces.\n• Wash your hands often with soap and water for at least 20 seconds, or use an alcohol based hand sanitizer that contains at least 60% alcohol."),
               headerTips("Practice social\ndistancing"),
@@ -45,11 +45,11 @@ class PreventionScreen extends StatelessWidget {
           padding: EdgeInsets.all(yMargin(1)),
           child: SvgPicture.asset(
             "assets/icons/virus.svg",
-            height: 40,
+            height: yMargin(5),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(yMargin(2)),
+          padding: EdgeInsets.all(yMargin(3)),
           child: Text(
             heading,
             style: headingStyle(),
@@ -59,5 +59,6 @@ class PreventionScreen extends StatelessWidget {
     );
   }
 
-  TextStyle headingStyle() => TextStyle(fontSize: 20, color: Colors.green[500]);
+  TextStyle headingStyle() =>
+      TextStyle(fontSize: yMargin(3), color: Colors.green[600]);
 }

@@ -34,7 +34,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
           recovered: 0,
           deaths: 0,
         );
-        print('error Null data obtained');
+        print('null:data');
         return;
       }
       for (var eachData in virusData) {
@@ -67,7 +67,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
 
   _searchBar() {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.only(bottom: yMargin(2)),
       child: TextField(
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -110,7 +110,10 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("Cases: ${countriesForDisplay[index].confirmedCases}"),
+                Text(
+                  "Cases: ${countriesForDisplay[index].confirmedCases}",
+                  style: TextStyle(color: Colors.red),
+                ),
                 Container(
                   child: Image.network(countriesForDisplay[index].flagUrl),
                   height: yMargin(5),
@@ -118,7 +121,8 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
                 Text(
                   "${index + 1}.  ${countriesForDisplay[index].country}",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontFamily: "Titillium"),
+                  style: TextStyle(
+                      fontSize: yMargin(2.5), fontFamily: "Titillium"),
                 )
               ],
             ),
@@ -134,22 +138,9 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("All Countries"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.info_outline),
-            onPressed: () => _scaffoldKey.currentState.showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Data Source: https://www.worldometers.info/coronavirus/',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(xMargin(4)),
         child: Column(
           children: <Widget>[
             _searchBar(),

@@ -3,8 +3,6 @@ import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/data/state_virus_data.dart';
 
 class StatesInfoScreen extends StatefulWidget {
-  static const routeName = '/states-info-screen';
-
   final stateVirusData;
   StatesInfoScreen({this.stateVirusData});
   @override
@@ -28,7 +26,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
     return Card(
       elevation: 2,
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(xMargin(3)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,14 +35,24 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
               Text(
                 "${statesForDisplay[index].stateName}",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, fontFamily: "Titillium"),
+                style:
+                    TextStyle(fontSize: yMargin(2.5), fontFamily: "Titillium"),
               ),
               Container(
                 child: Column(
                   children: <Widget>[
-                    Text("Cases: ${statesForDisplay[index].confirmedCases}"),
-                    Text("Recovered: ${statesForDisplay[index].recovered}"),
-                    Text("Death: ${statesForDisplay[index].deaths}"),
+                    Text(
+                      "Cases: ${statesForDisplay[index].confirmedCases}",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text(
+                      "Recovered: ${statesForDisplay[index].recovered}",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    Text(
+                      "Death: ${statesForDisplay[index].deaths}",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
               )
@@ -124,22 +132,9 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("States of INDIA"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.info_outline),
-            onPressed: () => _scaffoldKey.currentState.showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Data Source: https://www.worldometers.info/coronavirus/',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(yMargin(2)),
         child: Column(
           children: <Widget>[
             _searchBar(),

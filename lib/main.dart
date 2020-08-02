@@ -19,10 +19,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'COVID-19 Tracker',
           theme: theme,
-          //  don't forget to uncomment the following line.
           home: LoadingScreen(),
-          routes: {},
-          // home: ChartsScreen(),
         );
       },
     );

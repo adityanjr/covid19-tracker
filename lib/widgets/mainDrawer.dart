@@ -30,9 +30,7 @@ class MyCustomClipper extends CustomClipper<Path> {
 
 Drawer buildDrawer(context, isLight, widget) {
   return Drawer(
-    elevation: 3,
     child: Container(
-      color: Colors.grey[300],
       padding: EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,7 +68,7 @@ Drawer buildDrawer(context, isLight, widget) {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                      transitionDuration: Duration(milliseconds: 800),
+                      transitionDuration: Duration(milliseconds: 500),
                       pageBuilder: (context, animation, secondaryAnimation) =>
                           CountriesInfoScreen(
                         countryVirusData: widget.countriesData,
@@ -97,23 +95,25 @@ Drawer buildDrawer(context, isLight, widget) {
                 ),
               ),
               FlatButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 800),
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        StatesInfoScreen(stateVirusData: widget.statesData),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return SharedAxisTransition(
-                        child: child,
-                        animation: animation,
-                        secondaryAnimation: secondaryAnimation,
-                        transitionType: SharedAxisTransitionType.scaled,
-                      );
-                    },
-                  ),
-                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 500),
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            StatesInfoScreen(stateVirusData: widget.statesData),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return SharedAxisTransition(
+                            child: child,
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            transitionType: SharedAxisTransitionType.scaled,
+                          );
+                        }),
+                  );
+                },
                 child: Row(
                   children: <Widget>[
                     SvgPicture.asset(
@@ -133,6 +133,7 @@ Drawer buildDrawer(context, isLight, widget) {
               ),
               FlatButton(
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -203,13 +204,13 @@ Drawer buildDrawer(context, isLight, widget) {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: xMargin(5)),
+                padding: EdgeInsets.only(left: xMargin(2)),
                 child: Text(
                   "Covid Tracker",
                   style: TextStyle(
                       fontFamily: "Kayak",
-                      fontSize: yMargin(2),
-                      color: Colors.blue),
+                      fontSize: yMargin(2.4),
+                      color: Colors.teal),
                 ),
               ),
               SizedBox(

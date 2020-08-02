@@ -16,7 +16,6 @@ import 'package:flutter_app/widgets/worldCard.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/homepage';
   HomePage(
       {this.locationVirusData,
       this.virusData,

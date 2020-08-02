@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_app/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 class AboutCovid extends StatefulWidget {
-  static const routeName = '/info-screen';
   @override
   _AboutCovidState createState() => _AboutCovidState();
 }
@@ -50,12 +50,11 @@ class _AboutCovidState extends State<AboutCovid> {
             onPressed: () => _scaffoldKey.currentState.showSnackBar(
               SnackBar(
                 action: SnackBarAction(
-                    textColor: Colors.greenAccent,
-                    label: 'Open Website',
+                    label: 'Open',
                     onPressed: () => launch(
                         'https://www.who.int/emergencies/diseases/novel-coronavirus-2019')),
                 content: Text(
-                  'Video Source: https://www.who.int/emergencies/diseases/novel-coronavirus-2019',
+                  'https://www.who.int/emergencies/diseases/novel-coronavirus-2019',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -66,26 +65,14 @@ class _AboutCovidState extends State<AboutCovid> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 20),
-            Text(
-              'About the Virus',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.lightBlueAccent),
-              textAlign: TextAlign.center,
-            ),
             playVideo(_controller2),
-            SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(xMargin(6)),
               child: Text(
                 info ?? 'Loading...',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green),
               ),
             ),
-            SizedBox(height: 20),
           ],
         ),
       ),
@@ -94,7 +81,7 @@ class _AboutCovidState extends State<AboutCovid> {
 
   Container playVideo(VideoPlayerController controller) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(xMargin(5)),
       child: AspectRatio(
         aspectRatio: _controller2.value.aspectRatio,
         child: Stack(
@@ -134,9 +121,9 @@ class __PlayPauseOverlayState extends State<_PlayPauseOverlay> {
                   color: Colors.black26,
                   child: Center(
                     child: Icon(
-                      Icons.play_arrow,
+                      Icons.play_circle_outline,
                       color: Colors.white,
-                      size: 100.0,
+                      size: yMargin(12),
                     ),
                   ),
                 ),

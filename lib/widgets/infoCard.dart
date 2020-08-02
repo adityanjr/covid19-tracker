@@ -67,7 +67,7 @@ class InfoCard extends StatelessWidget {
                               dotData: FlDotData(show: false),
                               belowBarData: BarAreaData(show: false),
                               colors: [color],
-                              barWidth: 3,
+                              barWidth: 3.5,
                             )
                           ])),
                     ))

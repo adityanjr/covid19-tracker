@@ -1,7 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants.dart';
 import 'package:flutter_app/screens/HomePage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../services/api_data.dart';
 
@@ -29,7 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1500),
+          transitionDuration: Duration(milliseconds: 500),
           pageBuilder: (context, animation, secondaryAnimation) => HomePage(
             countriesData: countriesData,
             locationVirusData: locationData,
@@ -42,12 +44,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
         ));
   }
 
-  final spinKit1 = SpinKitPulse(
+  final spinKit1 = SpinKitFadingCircle(
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: Colors.blue,
+          color: Colors.red,
         ),
       );
     },
@@ -55,20 +57,38 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text('COVID-19 TRACKER'),
-          Text('v1.0'),
-          SizedBox(height: 20),
-          Text(
-            'fetching data, please wait...\n',
+          SvgPicture.asset(
+            "assets/icons/virus.svg",
+            height: yMargin(22),
           ),
-          spinKit1
+          Column(
+            children: <Widget>[
+              Text(
+                'COVID-19 TRACKER',
+                style: TextStyle(
+                    fontSize: yMargin(4),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
+              ),
+              Text('v1.0.0'),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Text(
+                'Fetching data, loading...\n',
+                style: TextStyle(fontSize: yMargin(3)),
+              ),
+              spinKit1,
+            ],
+          ),
         ],
-      )),
+      ),
     );
   }
 }
