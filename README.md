@@ -60,4 +60,4 @@ flutter run
 
 ## Thank You
 
-Open Sourced on Github. [![Follow](https://img.shields.io/github/followers/adityanjr?label=Follow&style=social)](https://github.com/adityanjr)
+Open Sourced on Github. &nbsp; &nbsp; &nbsp; &nbsp; [![Follow](https://img.shields.io/github/followers/adityanjr?label=Follow&style=social)](https://github.com/adityanjr)
