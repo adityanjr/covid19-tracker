@@ -2,40 +2,46 @@
 
 ## Installation
 
-- Get on Github [Releases](https://github.com/adityanjr/covid19-tracker/releases), or
-- After cloning:
-  `flutter pub get`
-  `flutter run`
+- Download [here](https://github.com/adityanjr/covid19-tracker/releases/download/v1.0.0/app-release.apk)
+- Get on Github [Releases](https://github.com/adityanjr/covid19-tracker/releases/tag/v1.0.0), or
+- Build on your own:
 
-## ✨ Features
+```
+git clone https://github.com/adityanjr/covid19-tracker.git
+flutter pub get
+flutter run
+
+```
+
+## Features
 
 - [x] Location based results.
-- [x] ReadTime updates.
-- [x] Search for countries.
+- [x] Live Data.
+- [x] InfoGraphs for all Countries
+- [x] Search Option for ease.
 - [x] Indian States data.
 - [x] Live Map in WebView.
+- [x] Dynamic Theme (light & dark).
 
-## 💻 Demo
+## Demo
 
-<div>
-<img src="assets/screenshot/gif.gif" width="300">
-</div>
+![demo-app](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/gif.gif)
 
-## 📸 Screenshots
+## Screenshots
 
-<div>
-<img src="assets/screenshot/1.jpg" width="300" style="border-radius: 15px">
+<p>
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/1.png" width="200" style="border-radius: 15px">
 &nbsp;
-<img src="assets/screenshot/2.jpg" width="300" style="border-radius: 15px">
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/2.png" width="200" style="border-radius: 15px">
 &nbsp;
-<img src="assets/screenshot/3.jpg" width="300" style="border-radius: 15px">
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/3.png" width="200" style="border-radius: 15px">
 &nbsp;
-<img src="assets/screenshot/4.jpg" width="300" style="border-radius: 15px">
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/4.png" width="200" style="border-radius: 15px">
 &nbsp;
-<img src="assets/screenshot/5.jpg">
-</div>
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/5.png>
+<p>
 
-## 🔌 Plugins
+## Plugins
 
 |                           Name                            |      Usage       |
 | :-------------------------------------------------------: | :--------------: |
