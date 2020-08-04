@@ -25,7 +25,7 @@ flutter run
 
 ## Demo
 
-![demo-app](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/main.gif)
+![demo-app](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/demo.gif)
 
 ## Screenshots
 
@@ -45,8 +45,19 @@ flutter run
 
 ## Plugins
 
-|                           Name                            |      Usage       |
-| :-------------------------------------------------------: | :--------------: |
-| [**flutter_bloc**](https://pub.dev/packages/flutter_bloc) | State Management |
-|          [**DIO**](https://pub.dev/packages/dio)          |  Network calls   |
-|  [**WebView**](https://pub.dev/packages/webview_flutter)  |  InApp WebView   |
+|                                     Name                                      |       Usage        |
+| :---------------------------------------------------------------------------: | :----------------: |
+|                   [**http**](https://pub.dev/packages/http)                   |   Network calls    |
+|             [**animations**](https://pub.dev/packages/animations)             |     Animations     |
+|               [**fl_chart**](https://pub.dev/packages/fl_chart)               |       Charts       |
+|           [**url_launcher**](https://pub.dev/packages/url_launcher)           | Launch Custom URL  |
+|          [**dynamic_theme**](https://pub.dev/packages/dynamic_theme)          | Light & Dark Theme |
+|        [**flutter_spinkit**](https://pub.dev/packages/flutter_spinkit)        |  Loading SpinKit   |
+| [**flutter_webview_plugin**](https://pub.dev/packages/flutter_webview_plugin) |   InApp WebView    |
+|             [**geolocator**](https://pub.dev/packages/geolocator)             |    GeoLocation     |
+|           [**video_player**](https://pub.dev/packages/video_player)           |    Video Player    |
+|        [**flutter_phoenix**](https://pub.dev/packages/flutter_phoenix)        |     Reload App     |
+
+## Thank You
+
+Open Sourced on Github. [![Follow](https://img.shields.io/github/followers/adityanjr?label=Follow&style=social)](https://github.com/adityanjr)
