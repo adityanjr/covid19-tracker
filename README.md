@@ -1,4 +1,4 @@
-![covid19-tracker](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/main.jpg)
+![covid19-tracker](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/main.png)
 
 ## Installation
 
@@ -25,7 +25,7 @@ flutter run
 
 ## Demo
 
-![demo-app](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/gif.gif)
+![demo-app](https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/main.gif)
 
 ## Screenshots
 
@@ -38,8 +38,10 @@ flutter run
 &nbsp;
 <img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/4.png" width="200" style="border-radius: 15px">
 &nbsp;
-<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/5.png>
-<p>
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/5.png" width="200" style="border-radius: 15px">
+&nbsp;
+<img src="https://github.com/adityanjr/covid19-tracker/blob/master/assets/screenshot/6.png" width="200" style="border-radius: 15px">
+</p>
 
 ## Plugins
 
