@@ -1,5 +1,5 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animations/animations.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/country_virus_data.dart';
 import 'package:flutter_app/data/virus_data.dart';
@@ -35,14 +35,13 @@ class _HomePageState extends State<HomePage> {
   CountryVirusData locationData;
   int index = 0;
   List<CountryVirusData> countriesData = [];
-  bool isLight;
+  bool isLight = true;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     updateUI(widget.virusData);
-
     updateLocationUI(widget.locationVirusData);
     updateCountriesUI(widget.countriesData);
     super.initState();
@@ -117,7 +116,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    isLight = DynamicTheme.of(context).brightness == Brightness.light;
     return Scaffold(
         appBar: AppBar(
           key: _scaffoldKey,
@@ -135,24 +133,12 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.lightbulb_outline),
-              onPressed: () => setState(
-                () {
-                  if (isLight) {
-                    // brightness = Brightness.dark;
-                    isLight = !isLight;
-                    DynamicTheme.of(context).setBrightness(Brightness.dark);
-                  } else if (!isLight) {
-                    isLight = !isLight;
-                    // brightness = Brightness.light;
-                    DynamicTheme.of(context).setBrightness(Brightness.light);
-                  } else {
-                    isLight =
-                        DynamicThemeState().brightness == Brightness.light;
-                    // brightness = Brightness.dark;
-                    DynamicTheme.of(context).setBrightness(Brightness.dark);
-                  }
-                },
-              ),
+              onPressed: () {
+                isLight ? AdaptiveTheme.of(context).setDark() : AdaptiveTheme.of(context).setLight();
+                setState(() {
+                  isLight = !isLight;
+                });
+              }
             )
           ],
         ),
@@ -207,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(left: xMargin(4)),
-                        child: FlatButton(
+                        child: TextButton(
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -259,7 +245,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -271,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                       title: "COVID-19",
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -299,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                       title: "Indian States",
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(

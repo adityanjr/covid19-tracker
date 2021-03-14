@@ -14,9 +14,9 @@ class MyCustomClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    path.lineTo(size.width * 0.75, 0);
+    path.lineTo(size.width * 0.8, 0);
     path.quadraticBezierTo(
-        280, size.height * 0.5, size.width * 0.7, size.height);
+        280, size.height * 0.6, size.width * 0.8, size.height);
     path.lineTo(0, size.height);
     path.close();
     return path;
@@ -40,18 +40,18 @@ Drawer buildDrawer(context, isLight, widget) {
             padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 2),
             child: Image.asset(
               isLight ? "assets/covid_black.png" : "assets/covid_white.png",
-              width: xMargin(40),
+              width: 160,
             ),
           ),
           Column(
             children: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.home),
+                    Icon(Icons.home, color: isLight ? Colors.black : Colors.white),
                     SizedBox(
                       width: 10,
                     ),
@@ -62,7 +62,7 @@ Drawer buildDrawer(context, isLight, widget) {
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -83,7 +83,7 @@ Drawer buildDrawer(context, isLight, widget) {
                 },
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.flag),
+                    Icon(Icons.flag, color: isLight ? Colors.black : Colors.white),
                     SizedBox(
                       width: 10,
                     ),
@@ -94,7 +94,7 @@ Drawer buildDrawer(context, isLight, widget) {
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -131,7 +131,7 @@ Drawer buildDrawer(context, isLight, widget) {
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -156,13 +156,13 @@ Drawer buildDrawer(context, isLight, widget) {
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Phoenix.rebirth(context);
                 },
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.refresh),
+                    Icon(Icons.refresh, color: isLight ? Colors.black : Colors.white,),
                     SizedBox(
                       width: 10,
                     ),
@@ -173,7 +173,7 @@ Drawer buildDrawer(context, isLight, widget) {
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   showAboutDialog(
                       context: context,
@@ -188,7 +188,7 @@ Drawer buildDrawer(context, isLight, widget) {
                 },
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.info),
+                    Icon(Icons.info, color: isLight ? Colors.black : Colors.white,),
                     SizedBox(
                       width: 10,
                     ),
@@ -204,12 +204,12 @@ Drawer buildDrawer(context, isLight, widget) {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: xMargin(2)),
+                padding: EdgeInsets.only(left: 4),
                 child: Text(
                   "Covid Tracker",
                   style: TextStyle(
                       fontFamily: "Kayak",
-                      fontSize: yMargin(2.4),
+                      fontSize: 16,
                       color: Colors.teal),
                 ),
               ),
@@ -226,7 +226,7 @@ Drawer buildDrawer(context, isLight, widget) {
               ),
               Text(
                 "© Aditya Singh",
-                style: TextStyle(fontFamily: "Kayak", fontSize: yMargin(2)),
+                style: TextStyle(fontFamily: "Kayak", fontSize: 14),
               )
             ],
           )
