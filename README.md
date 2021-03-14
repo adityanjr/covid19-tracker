@@ -2,8 +2,8 @@
 
 ## Installation
 
-- Download [here](https://github.com/adityanjr/covid19-tracker/releases/download/v1.0.0/app-release.apk)
-- Get on Github [Releases](https://github.com/adityanjr/covid19-tracker/releases/tag/v1.0.0), or
+- Download apk [here](https://github.com/adityanjr/covid19-tracker/releases/download/v1.1.0/app-release.apk)
+- Get on Github [Releases](https://github.com/adityanjr/covid19-tracker/releases/tag/v1.1.0), or
 - Build on your own:
 
 ```
@@ -12,6 +12,14 @@ flutter pub get
 flutter run
 
 ```
+## Web Build
+
+repo :
+```
+https://github.com/adityanjr/covid-tracker-web
+```
+live : 
+[https://adityanjr.github.io/covid-tracker-web/#/](https://adityanjr.github.io/covid-tracker-web/#/)
 
 ## Features
 
